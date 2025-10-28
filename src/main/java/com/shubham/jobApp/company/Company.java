@@ -2,6 +2,7 @@ package com.shubham.jobApp.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shubham.jobApp.job.Job;
+import com.shubham.jobApp.review.Review;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,16 +17,21 @@ public class Company {
     private String description;
     @JsonIgnore
     @OneToMany(mappedBy = "company")
-    private List<Job>jobs;
+    private List<Job> jobs;
+
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
+
 
     public Company() {
     }
 
-    public Company(Long id, String name, String description, List<Job> jobs) {
+    public Company(Long id, String name, String description, List<Job> jobs, List<Review> reviews) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.jobs = jobs;
+        this.reviews = reviews;
     }
 
     public Long getId() {
@@ -58,5 +64,13 @@ public class Company {
 
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
